@@ -1,0 +1,60 @@
+﻿@model ECommerce.Entity.Member
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+<div class="main-container container">
+    <ul class="header-main ">
+        <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li class="home"><a href="#">Account   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li> My Account</li>
+    </ul>
+
+    <div class="row">
+        <!--Middle Part Start-->
+        <div class="col-sm-9" id="content">
+            <h2 class="title">Edit Profile</h2>
+            <p class="lead">Hello, <strong>@Model.FirstName @Model.LastName</strong> </p>
+            <form method="post" action="~/Profile/EditProfile">
+                @Html.HiddenFor(model=>model.UserId)
+                <div class="row">
+                    <div class="col-sm-9">
+                        <fieldset id="personal-details">
+                            <legend>Personal Details</legend>
+                            <div class="form-group required">
+                                <label for="input-firstname" class="control-label">First Name</label>
+                                <input type="text" class="form-control" id="FirstName" required="required" placeholder="First Name" value="@Model.FirstName" name="FirstName">
+                            </div>
+                            <div class="form-group required">
+                                <label for="input-lastname" class="control-label">Last Name</label>
+                                <input type="text" class="form-control" id="LastName" required="required" placeholder="Last Name" value="@Model.LastName" name="LastName">
+                            </div>
+                            <div class="form-group required">
+                                <label for="input-email" class="control-label">E-Mail</label>
+                                <input type="email" class="form-control" id="Email" required="required" placeholder="E-Mail" value="@Model.Email" name="Email">
+                            </div>
+
+                            <div class="form-group required">
+                                <label for="input-password" class="control-label">Adress</label>
+                                <input type="text" class="form-control" id="Address" required="required" placeholder="Adress" value="@Model.Address" name="Address">
+                            </div>
+                            <div class="buttons clearfix">
+                                <div class="pull-right">
+                                    <input type="submit" class="btn btn-md btn-primary" />
+                               
+                            </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!--Middle Part End-->
+        <!--Right Part Start -->
+        @Html.Partial("~/Views/Shared1/_AccountSettings.cshtml")
+        <!--Right Part End -->
+    </div>
+</div>

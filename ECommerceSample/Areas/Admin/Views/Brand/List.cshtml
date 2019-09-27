@@ -1,0 +1,30 @@
+﻿@using ECommerce.Entity
+@model IEnumerable<Brand>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Brand List</h2>
+<table border="1" class="table table-hover">
+    <tr>
+        <th>@Html.DisplayNameFor(t=>t.BrandName)</th>
+        <th>@Html.DisplayNameFor(t=>t.Description)</th>
+        <th>@Html.DisplayNameFor(t=>t.Photo)</th>
+        <th>Edit & Delete & Show</th>
+    </tr>
+    @foreach (Brand item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(t=>item.BrandName)</td>
+            <td>@Html.DisplayFor(t=>item.Description)</td>
+            <td><center><img src="~/Upload/@item.Photo" class="img-circle" style="width:75px" height="75"/></center></td>
+            <td width="25%">
+                @Html.ActionLink("Edit", "Edit", new { @id = item.BrandId }, new { @class = "btn btn-warning" ,@style="width:100px"})
+                <a target="_blank" href="/Home/ListByBrand/@item.BrandId" class="btn btn-info" style="width:100px">Show</a>
+                @Html.ActionLink("Delete", "Delete", new { @id = item.BrandId }, new { @class = "btn btn-danger" ,@style="width:100px"})
+            </td>
+        </tr>
+    }
+</table>
+

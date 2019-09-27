@@ -1,0 +1,408 @@
+﻿@using ECommerce.Repository
+@using ECommerce.Entity
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic page needs
+    ============================================ -->
+    <title>Babadan Express | @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/Content/css/bootstrap/css/bootstrap.min.css">
+    <link href="~/Content/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="~/Content/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/css/themecss/lib.css" rel="stylesheet">
+    <link href="~/Content/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="~/Content/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="~/Content/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="~/Content/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="~/Content/css/footer1.css" rel="stylesheet">
+    <link href="~/Content/css/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="~/Content/css/theme.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/category.css">
+
+
+
+
+</head>
+
+<body class="res layout-subpage banners-effect-7">
+    <div id="wrapper" class="wrapper-full ">
+        <!-- Header Container  -->
+        <header id="header" class=" variantleft type_1">
+            <!-- Header Top -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="header-top-left form-inline col-sm-6 col-xs-6 compact-hidden">
+
+                        </div>
+                        <div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
+                            <div class="tabBlock1" id="TabBlock-1">
+                                <ul class="top-link list-inline">
+                                  
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                         MemberRepository mr = new MemberRepository();
+                                        int userId = mr.List().ProcessResult.FirstOrDefault(x => x.FirstName == User.Identity.Name).UserId;
+                                        int? RoleId = mr.List().ProcessResult.FirstOrDefault(x => x.FirstName == User.Identity.Name).RoleId;
+                                        <li class="wishlist hidden-xs"><a id="wishlist-total" class="top-link-wishlist" title=""><span>Welcome @User.Identity.Name.ToUpper()</span></a></li>
+                                        if (RoleId == 1)
+                                        {
+                                            <li class="signin"><a id="" href="~/Admin/Product/List" class="top-link-checkout" title=""><span>Admin Panel</span></a></li>
+                                        }
+                                        
+                                        <li class="signin"><a id="username" href="~/Profile/ProfilePage/@userId" class="top-link-checkout" title=""><span>My Account</span></a></li>
+                                        <li class="register"><a href="~/Account/LogOut" title="Register"><span>Log Out</span></a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="signin"><a href="~/Account/Login" class="top-link-checkout" title="Sign In"><span>Sign In</span></a></li>
+                                        <li class="register"><a href="~/Account/Register" title="Register"><span>Register</span></a></li>
+                                    }
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //Header Top -->
+            <!-- Header center -->
+            <div class="header-center left">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo -->
+                        <div class="navbar-logo col-md-3 col-sm-12 col-xs-7">
+                            <a href="~/Home/Index"><h1 class="title">Babadan Express</h1></a>
+                        </div>
+                        <!-- //end Logo -->
+                        <!-- Search -->
+                        <div id="sosearchpro" class="col-xs-12 col-sm-8 col-md-5 search-pro">
+
+                            <form method="GET" action="index.html">
+                                <div id="search0" class="search input-group">
+                                    <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Search product..." name="search">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!-- //end Search -->
+                        <!-- Secondary menu -->
+                        <div class="col-md-4 col-sm-4 col-xs-5 shopping_cart pull-right">
+                            <div class="header-text hidden-xs">
+                                <p><i class="fa fa-phone" aria-hidden="true"></i> Call Us: (888) 123456789</p>
+                            </div>
+                            <!--cart-->
+                            @{
+
+                                Order ord = (Order)Session["Order"];
+                                int? adet = 0;
+                                decimal? TotalPrice = 0;
+                                if (ord != null)
+                                {
+
+                                    foreach (OrderDetail item in ord.OrderDetails)
+                                    {
+                                        adet += item.Quantity;
+                                        TotalPrice += item.Price;
+                                    }
+                                }
+
+                            }
+                            <div id="cart" class=" btn-group btn-shopping-cart">
+                                <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
+                                    <div class="shopcart">
+                                        <span class="handle pull-left"></span>
+                                        <span class="title">My Cart</span>
+                                        <p class="text-shopping-cart cart-total-full">@Html.Label(adet.ToString()) </p>
+                                    </div>
+                                </a>
+
+                                <ul style="width: 400px;" class="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu">
+
+                                    <li>
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <td>Image</td>
+                                                <td>Product</td>
+                                                <td>Quantity</td>
+                                                <td>Price</td>
+                                            </tr>
+                                            <tbody>
+                                                @{
+                                                    if (ord != null)
+                                                    {
+                                                        foreach (OrderDetail item in ord.OrderDetails)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-center" style="width:70px">
+                                                                    <a href=""> <img src="~/Upload/@item.Product.Photo" style="width:70px" alt="" title="" class="preview"> </a>
+                                                                </td>
+                                                                <td class="text-left"> <a class="cart_product_name" href="~/Home/Detail/~@item.ProductId">@item.Product.ProductName</a> </td>
+                                                                <td class="text-center"> @item.Quantity </td>
+                                                                <td class="text-center"> @item.Price.Value.ToString("C0") </td>
+
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+
+
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">
+                                                            <strong>Total</strong>
+                                                        </td>
+                                                        <td class="text-right">@TotalPrice.Value.ToString("C0") ₺</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @if (Session["Order"] == null)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <p class="text-right">
+                                                    <a class="btn view-cart" href="~/Order/DetailList"><i class="fa fa-shopping-cart"></i>View Cart</a>
+
+                                                </p>
+                                            }
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--//cart-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- //Header center -->
+            <!-- Header Bottom -->
+            <div class="header-bottom">
+                <div class="container">
+                    <div class="row">
+
+
+                        <!-- Main menu -->
+                        <!-- //end Main menu -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navbar switcher -->
+            <!-- //end Navbar switcher -->
+
+        </header>
+        <!-- //Header Container  -->
+        <!-- Main Container  -->
+
+        @RenderBody()
+
+
+        <!-- //Main Container -->
+
+
+        <footer class="footer-container type_footer1">
+            <!-- Footer Top Container -->
+            <section class="footer-top">
+                <div class="container content">
+                    <div class="">
+                        <div class=" collapsed-block ">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Contact Us </h3>
+                                <div class="modcontent">
+                                    <ul class="contact-address">
+                                        <li>
+                                            <p><span class="fa fa-map-marker"></span><span>Address : </span> My Company, 42 avenue des Champs Elysées</p>
+                                        </li>
+                                        <li><span class="fa fa-envelope-o"></span><span>Email : </span> <a href="#"> sales@yourcompany.com</a></li>
+                                        <li>
+                                            <p><span class="fa fa-phone"> </span><span>Phone :</span> 0123456789</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="share-icon">
+                                    <ul>
+                                        <li class="facebook"><a><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li class="twitter"><a><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li class="google"><a><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                        <li class="skype"><a><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" box-information">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Information</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="order-history.html">Order history</a></li>
+                                        <li><a href="order-information.html">Order information</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" box-extras">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Extras</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="return.html">Returns</a></li>
+                                        <li><a href="sitemap.html">Site Map</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-account">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">My Account</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="product.html">Brands</a></li>
+                                        <li><a href="gift-voucher.html">Gift Vouchers</a></li>
+                                        <li><a href="product.html">Affiliates</a></li>
+                                        <li><a href="product.html">Specials</a></li>
+                                        <li><a href="blog.html" target="_blank">Our Blog</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </section>
+            <!-- /Footer Top Container -->
+            <div class="footer-mid">
+                <div class=" help">
+                    <div class=" container">
+                        <div class=" row">
+                            <div class="footer-mid-left col-sm-6 col-xs-12">
+                                <h3>NEED HELP? </h3>
+                                <p>SUPPORT TEAM 24/7 AT (844) 555-8386</p>
+                            </div>
+                            <div class="footer-mid-right col-sm-6 col-xs-12">
+                                <div class="btn-sub">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Your Email Address..." name="subscribe">
+                                    <button type="submit" class="button-search btn btn-primary" name="submit_subscribe">Subscribe</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- //end Footer Container -->
+
+    </div>
+    <!-- Social widgets -->
+    <div class="footer-bottom-block ">
+        <div class=" container">
+            <div class="row">
+                <div class="footer-bottom-header">
+                    <div class="col-xs-12 col-sm-12 col-md-5 download">
+                        <h3>Download Our App</h3>
+                        <a><img src="img/demo/download/app.jpg" alt=""></a>
+                        <a><img src="img/demo/download/ggplay.jpg" alt=""></a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 pay">
+                        <ul>
+                            <li><img src="img/demo/payment/visa.jpg" alt=""></li>
+                            <li><img src="img/demo/payment/meastro.jpg" alt=""></li>
+                            <li><img src="img/demo/payment/paypal.jpg" alt=""></li>
+                            <li><img src="img/demo/payment/union.jpg" alt=""></li>
+                            <li><img src="img/demo/payment/cirrus.jpg" alt=""></li>
+                            <li><img src="img/demo/payment/ebay.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-footer-bot">
+                    <p>Destino - Premium Multipurpose HTML5/CSS3 Theme - Designed by <a href="#">SmartAddons.Com</a></p>
+                </div>
+                <div class="back-to-top"><i class="fa fa-angle-up"></i><span> Top </span></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Social widgets -->
+    <!-- Include Libs & Plugins
+    ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="~/Content/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/Content/js/themejs/libs.js"></script>
+    <script type="text/javascript" src="~/Content/js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript" src="~/Content/js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/datetimepicker/moment.js"></script>
+    <script type="text/javascript" src="~/Content/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui/jquery-ui.min.js"></script>
+
+
+    <!-- Theme files
+    ============================================ -->
+
+
+    <script type="text/javascript" src="~/Content/js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript" src="~/Content/js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="~/Content/js/themejs/application.js"></script>
+    <script type="text/javascript">
+        <!--
+        // Check if Cookie exists
+        if ($.cookie('display')) {
+            view = $.cookie('display');
+        } else {
+            view = 'grid';
+        }
+        if (view) display(view);
+                //-->
+    </script>
+</body>
+
+</html>

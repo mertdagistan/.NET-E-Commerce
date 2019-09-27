@@ -1,0 +1,17 @@
+﻿@model ECommerce.Entity.Member
+    <aside class="col-sm-3 hidden-xs" id="column-right">
+        <h2 class="subtitle">Account</h2>
+        <div class="list-group">
+            <ul class="list-item" style="font-size:15px">
+                <li>
+                    <a href="~/Profile/ProfilePage/@Model.UserId">My Account</a>
+                </li>
+                <li>
+                    <a href="~/Profile/EditPassword/@Model.UserId">Change Password</a>
+                </li>
+                <li>
+                    <a href="~/Profile/OrderHistory/@Model.UserId">Order History</a>
+                </li>
+            </ul>
+        </div>
+    </aside>

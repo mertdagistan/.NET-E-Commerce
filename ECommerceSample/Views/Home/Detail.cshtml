@@ -1,0 +1,96 @@
+﻿@using ECommerce.Entity
+@model Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+<div class="main-container container">
+    <ul class="header-main product-v2">
+        <li class="home"><a href="/Home/Index" class="product-img">Home<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+        <li class="home"><a href="/Home/List/@Model.CategoryId" class="product-img">@Model.Category.CategoryName<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+        <li class="home"><a  class="product-img">@Model.ProductName</a></li>
+    </ul>
+
+    <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-md-12 col-sm-12 type-2">
+
+            <div class="product-view row">
+                <div class="left-content-product col-lg-12 col-xs-12">
+                    <div class="row">
+                        <div class="content-product-left  col-sm-6 col-xs-12 ">
+
+                            <div class="large-image">
+                                <img src="~/Upload/@Model.Photo" title="" alt="">
+                            </div>
+
+                        </div>
+
+                        <div class="content-product-right col-sm-6 col-xs-12">
+                            <div class="title-product">
+                                <h1>@Model.ProductName</h1>
+                            </div>
+                            <div class="title-product" style="margin-bottom:20px">
+                                <strong><span style="font-size:18px">Brand: </span></strong><span><a style="font-size:18px;" href="/Home/ListByBrand/@Model.BrandId">@Model.Brand.BrandName</a></span>
+                            </div>
+                            <div class="product-label form-group">
+                                @if (Model.Stock > 0)
+                                {
+                                    <div class="stock">
+                                        <span>In Stock :</span> <span class="instock">@Model.Stock.ToString()</span>
+                                    </div>
+                                }
+
+                                <div style="margin-top: 30px" class="product_page_price price">
+                                    <span class="price-new" itemprop="price">@Model.Price.Value.ToString("C2") </span>
+                                </div>
+
+                            </div>
+
+                            <div id="product">
+                                <div class="form-group box-info-product">
+                                    <div class="option quantity">
+                                        <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+                                            <label>Qty:  </label>
+                                            <input class="form-control" type="text" name="quantity" value="1">
+                                            <input type="hidden" name="product_id" value="50">
+                                            <span class="input-group-addon product_quantity_down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon product_quantity_up"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="info-product-left">
+                                    <div class="button-group">
+                                        <a href="~/Order/Add/@Model.ProductId" class="addToCart btn btn-default " data-toggle="tooltip" title="" onclick="cart.add('42', '1');" data-original-title="Add to Cart"> <span class="">Add to Cart</span></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- end box info product -->
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <!-- //Product Tabs -->
+            <!-- Related Products -->
+
+
+
+
+
+        </div>
+
+
+    </div>
+    <!--Middle Part End-->
+</div>

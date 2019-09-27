@@ -1,0 +1,27 @@
+﻿@using ECommerce.Entity
+@model Category
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddCategory</h2>
+@using (Html.BeginForm())
+{
+<div>@ViewBag.Mesaj</div>
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(t=>t.CategoryName)</td>
+            <td>@Html.EditorFor(t=>t.CategoryName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(t=>t.Description)</td>
+            <td>@Html.EditorFor(t=>t.Description)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Save" class="btn btn-success"/>
+            </td>
+        </tr>
+    </table>
+}

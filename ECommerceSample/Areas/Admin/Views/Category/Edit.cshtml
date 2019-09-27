@@ -1,0 +1,30 @@
+﻿@using ECommerce.Entity
+@model Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Category</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(t=>t.CategoryId)
+    <div>
+        <label>@ViewBag.Mesaj</label>
+    </div>
+    <table class="table table-hover">
+        <tr>
+            <td>@Html.DisplayNameFor(t=>t.CategoryName)</td>
+            <td>@Html.EditorFor(t=>t.CategoryName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(t=>t.Description)</td>
+            <td>@Html.EditorFor(t=>t.Description)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update" class="btn btn-success"/>
+            </td>
+        </tr>
+    </table>
+}

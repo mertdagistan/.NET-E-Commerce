@@ -1,0 +1,86 @@
+﻿@using ECommerceSample.Areas.Admin.Models.ViewModel
+@using ECommerce.Entity;
+@model ProductViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+    function imagepreview(input) {
+        if (input.files && input.files[0]) {
+            var filerd = new FileReader();
+            filerd.onload = function (e) {
+                $('#imgpreview').attr('src', e.target.result);
+            };
+            filerd.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<h2>Edit Product</h2>
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @ViewBag.Mesaj
+    </div>
+    <fieldset>
+        <legend>Product</legend>
+        @Html.HiddenFor(model => model.Product.ProductId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.ProductName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.ProductName)
+            @Html.ValidationMessageFor(model => model.Product.ProductName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.Price)
+            @Html.ValidationMessageFor(model => model.Product.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Stock)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.Stock)
+            @Html.ValidationMessageFor(model => model.Product.Stock)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Brand)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Product.BrandId, Model.BrandList)
+            @Html.ValidationMessageFor(model => model.Product.BrandId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Category)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Product.CategoryId, Model.CategoryList)
+            @Html.ValidationMessageFor(model => model.Product.CategoryId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Photo)
+        </div>
+        <div class="editor-field">
+            <img id="imgpreview" src="~/Upload/@Model.Product.Photo"  width="250" height="250" />
+            <input type="file" name="photo" id="photo" onchange="imagepreview(this);" />
+            @Html.ValidationMessageFor(model => model.Product.Photo)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.Product.Photo)
+            @Html.ValidationMessageFor(model => model.Product.Photo)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}

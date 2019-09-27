@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ECommerce.Entity.Product>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List</h2>
+<p>
+    @Html.ActionLink("Create New","Add")
+</p>
+<table class="table table-hover" border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model=>model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Brand.BrandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Stock)
+        </th>
+        <th>
+            Edit & Delete
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Brand.BrandName)
+    </td>
+    <td>
+        <img src="~/Upload/@item.Photo" width="100" height="100" class="img-circle" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Stock)
+    </td>
+    <td width="25%">
+        @Html.ActionLink("Edit", "Edit", new { @id = item.ProductId }, new { @class = "btn btn-warning", @style = "width:100px" })
+        <a target="_blank" href="/Home/Detail/@item.ProductId" class="btn btn-info" style="width:100px">Show</a>
+        @Html.ActionLink("Delete", "Delete", new { @id = item.ProductId }, new { @class = "btn btn-danger", @style = "width:100px" })
+    </td>
+</tr>
+    }
+</table>

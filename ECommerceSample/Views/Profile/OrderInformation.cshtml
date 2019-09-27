@@ -1,0 +1,118 @@
+﻿@using ECommerce.Entity
+@using ECommerce.Repository
+@using ECommerceSample.Models
+@model ECommerce.Entity.Invoice
+@{
+    ViewBag.Title = "OrderInformation";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+<div class="main-container container">
+    <ul class="header-main ">
+        <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li> Order Infomation</li>
+    </ul>
+
+    <div class="row">
+        <div id="content" class="col-sm-12">
+            <h2 class="title">Order Information</h2>
+
+            <table style="font-size:14px" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="1" class="text-left">Order Details</td>
+                        <td colspan="2" class="text-left">Address</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 50%;" class="text-left">
+                            <b>Order ID:</b> #@Model.OrderId
+                            <br>
+                            <b>Date Added:</b> @Model.PaymentDate
+                            <br >
+                            <b>Payment Method:</b> @Model.Payment.PaymentName
+                            <br>
+                            <b>Shipping :</b> @Model.Order.Shipper.ShipperName
+                        </td>
+                        <td style="width: 50%;" class="text-left">
+                            @Model.Order.Member.Address
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td class="text-center">Image</td>
+                            <td class="text-left">Product Name</td>
+                            <td class="text-right">Quantity</td>
+                            <td class="text-right">Price</td>
+                            <td class="text-right">Total</td>
+
+                        </tr>
+                    </thead>
+
+                    @{
+                        OrderInfoViewModel ovm = new OrderInfoViewModel();
+
+                        OrderRepository repoOr = new OrderRepository();
+                        OrderDetailRep repoOrd = new OrderDetailRep();
+                        InvoiceRepository repoInv = new InvoiceRepository();
+
+                        List<OrderInfoViewModel> infoModel = (from inv in repoInv.List().ProcessResult
+                                                              join ord in repoOr.List().ProcessResult on inv.OrderId equals ord.OrderId
+                                                              join det in repoOrd.List().ProcessResult on ord.OrderId equals det.OrderId
+                                                              where ord.OrderId == Model.OrderId
+                                                              select new OrderInfoViewModel
+                                                              {
+                                                                  Order = ord,
+                                                                  Invoice = inv,
+                                                                  OrderDetail = det
+
+                                                              }).ToList();
+
+                        <tbody>
+                            @foreach (var item in infoModel)
+                            {
+                                <tr style="font-size:15px">
+                                    <td class="text-center"><a target="_blank" href="~/Home/Detail/@item.OrderDetail.ProductId"><img width="250" src="~/Upload/@item.OrderDetail.Product.Photo" alt="" title="" class="img-thumbnail"></a></td>
+                                    <td class="text-left"><a style="color:black" target="_blank" href="~/Home/Detail/@item.OrderDetail.ProductId">@item.OrderDetail.Product.ProductName </a></td>
+                                    <td class="text-right">@item.OrderDetail.Quantity</td>
+                                    <td class="text-right">@item.OrderDetail.Product.Price.Value.ToString("C2")</td>
+                                    <td class="text-right">@item.OrderDetail.Price.Value.ToString("C2")</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        Order order = repoOr.List().ProcessResult.FirstOrDefault(t => t.OrderId == Model.OrderId);
+                        <tfoot style="font-size:15px">
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>Shipping (@order.Shipper.ShipperName):</b>
+                                </td>
+                                <td class="text-right">@order.Shipper.ShipperPrice.Value.ToString("C2")</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>Total</b>
+                                </td>
+                                <td class="text-right">@order.TotalPrice.Value.ToString("C2")</td>
+                            </tr>
+                        </tfoot>
+                    }
+                </table>
+            </div>
+            <div class="buttons clearfix">
+                <div class="pull-left">
+                    <a class="btn btn-primary" href="~/Profile/OrderHistory">Go Back Order History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

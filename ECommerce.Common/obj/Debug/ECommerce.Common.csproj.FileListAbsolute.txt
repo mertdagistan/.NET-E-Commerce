@@ -1,0 +1,30 @@
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.dll.config
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.dll
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.pdb
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.dll
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.dll
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.pdb
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.dll.config
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.xml
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csprojAssemblyReference.cache
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csproj.CoreCompileInputs.cache
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csproj.CopyComplete
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.dll
+C:\Users\ozhan.gulal\source\repos\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.pdb
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.dll.config
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.dll
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Common.pdb
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.dll
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.dll
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.pdb
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\ECommerce.Entity.dll.config
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.xml
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csprojAssemblyReference.cache
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csproj.CoreCompileInputs.cache
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.csproj.CopyComplete
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.dll
+C:\Users\Mert\Desktop\Yeni klasör (2)\ECommerceSample\ECommerce.Common\obj\Debug\ECommerce.Common.pdb

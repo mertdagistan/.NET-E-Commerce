@@ -1,0 +1,68 @@
+﻿@model ECommerce.Entity.Member
+
+@{
+    ViewBag.Title = "ProfilPage";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+    <div class="main-container container">
+        <h3 style="background-color: green;color: white;">@ViewBag.Success</h3>
+
+        <div class="row">
+            <!--Middle Part Start-->
+            <div class="col-sm-9" id="content">
+                <p class="lead">Hello, <strong>@Model.FirstName @Model.LastName</strong> </p>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <fieldset id="personal-details">
+                            <legend>Account Details</legend>
+                            <div class="row" style="border-bottom: 1px solid #e5e5e5;">
+                                <div class="col-sm-6">
+                                    <h3 style="font-weight:bold;margin-top:0">First Name:</h3>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <h3 style="margin-top:0">@Model.FirstName</h3>
+                                </div>
+                            </div>
+                            <div class="row" style="border-bottom: 1px solid #e5e5e5;">
+                                <div class="col-sm-6 ">
+                                    <h3 style="font-weight:bold;">Last Name:</h3>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <h3>@Model.LastName</h3>
+                                </div>
+                            </div>
+
+                            <div class="row" style="border-bottom: 1px solid #e5e5e5;">
+                                <div class="col-sm-6 ">
+                                    <h3 style="font-weight:bold;">Email:</h3>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <h3>@Model.Email</h3>
+                                </div>
+                            </div>
+                            <div class="row" style="border-bottom: 1px solid #e5e5e5;">
+                                <div class="col-sm-6 ">
+                                    <h3 style="font-weight:bold;">Adress</h3>
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <h3>@Model.Address</h3>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                        <div class="row" style="margin-top:30px">
+                            <div class="buttons clearfix">
+                                <div class="pull-right">
+                                    <a class="btn btn-md btn-primary" href="~/Profile/EditProfile/@Model.UserId">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Middle Part End-->
+            <!--Right Part Start -->
+            @Html.Partial("~/Views/Shared1/_AccountSettings.cshtml")
+        </div>
+    </div>

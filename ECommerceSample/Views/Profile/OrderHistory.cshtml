@@ -1,0 +1,66 @@
+﻿@using ECommerce.Entity
+@model IEnumerable<Invoice>
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+    <div class="main-container container">
+        <ul class="header-main ">
+            <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li> Order History</li>
+        </ul>
+
+        <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-9">
+                <h2 class="title">Order History</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                @*<td class="text-center">Image</td>
+                                <td class="text-left">Product Name</td>*@
+                                <td class="text-center">Order ID</td>
+                                <td class="text-center">Payment Type</td>
+                                <td class="text-center">Status</td>
+                                <td class="text-center">Date Added</td>
+                                <td class="text-right">Total</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Invoice item in Model)
+                            {
+                            <tr style="font-size:14px">
+                                @*<td class="text-center">
+                                    <a href="~/Home/Detail/@item.ProductId">
+                                        <img width="85" class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop" src="~/Upload/@item.Product.Photo">
+                                    </a>
+                                </td>
+                                <td class="text-left">
+                                    <a href="~/Home/Detail/@item.ProductId">@item.Product.ProductName</a>
+                                </td>*@
+                                <td class="text-center">#@item.OrderId</td>
+                                <td class="text-center">@item.Payment.PaymentName</td>
+                                <td class="text-center">Shipped</td>
+                                <td class="text-center">@item.Order.OrderDate</td>
+                                <td class="text-right">@item.Order.TotalPrice.Value.ToString("C0")</td>
+                                <td class="text-center">
+                                    <a class="btn btn-info" title="" data-toggle="tooltip" href="~/Profile/OrderInformation/@item.OrderId" data-original-title="View"><i class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>
+                            }
+                            
+                           
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--Middle Part End-->
+            <!--Right Part Start -->
+            @*@Html.Partial("~/Views/Shared1/_AccountSettings.cshtml")*@
+            <!--Right Part End -->
+        </div>
+    </div>

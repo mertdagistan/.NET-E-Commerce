@@ -1,0 +1,184 @@
+﻿@using ECommerce.Entity
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+<div class="main-container container">
+    <ul class="header-main ">
+        <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li> Checkout</li>
+    </ul>
+
+    <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-12">
+            <h2 class="title">Checkout</h2>
+            <div class="so-onepagecheckout ">
+
+                <div class="col-right col-sm-12">
+                    <div class="row">
+
+
+
+
+                        <!--Email Start-->
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><i class="fa fa-shopping-cart"></i> Shopping cart</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <td class="text-center">Image</td>
+                                                    <td class="text-left">Product Name</td>
+                                                    <td class="text-left">Quantity</td>
+                                                    <td class="text-right">Unit Price</td>
+                                                    <td class="text-right">Total</td>
+                                                </tr>
+                                            </thead>
+
+                                            @{
+                                                Order ord = (Order)Session["Order"];
+                                                if (ord != null)
+                                                {
+                                                    <tbody>
+                                                        @foreach (OrderDetail item in ord.OrderDetails)
+                                                        {
+                                                            <tr style="font-size:15px">
+                                                                <td class="text-center">
+                                                                    <a target="_blank" href="~/Home/Detail/@item.ProductId"><img width="60" src="~/Upload/@item.Product.Photo" alt="" title="" class="img-thumbnail"></a>
+                                                                </td>
+                                                                <td class="text-left" ><a style="color:black" target="_blank" href="~/Home/Detail/@item.ProductId">@item.Product.ProductName</a></td>
+                                                                <td class="text-left">
+                                                                    <div class="input-group btn-block checkout" style="min-width: 100px;">
+                                                                        <h4>@item.Quantity</h4>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-right">@item.Product.Price.Value.ToString("C2")</td>
+                                                                <td class="text-right">@item.Price.Value.ToString("C2")</td>
+                                                            </tr>
+                                                        }
+
+                                                    </tbody>
+
+                                                    <tfoot>
+
+
+                                                        @if (ord.ShipperId == null)
+                                                        {
+                                                            <tr style="font-size:15px">
+                                                                <td class="text-right" colspan="4"><strong>Shipping :</strong></td>
+                                                                <td class="text-right">
+                                                                    <p style="color:red">
+                                                                        Please select shipping company
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <tr style="font-size:15px">
+                                                                <td class="text-right" colspan="4"><strong>Shipping (@ord.Shipper.ShipperName) :</strong></td>
+                                                                <td class="text-right">@ord.Shipper.ShipperPrice</td>
+                                                            </tr>
+                                                        }
+
+
+                                                        <tr style="font-size:15px">
+                                                            <td class="text-right" colspan="4"><strong>Total:</strong></td>
+                                                            <td class="text-right">@ord.TotalPrice.Value.ToString("C2")</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                }
+
+                                            }
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <form action="~/Order/Shipper" method="post" >
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><i class="fa fa-truck"></i> Delivery Method</h4>
+                                    </div>
+                                    <div class="panel-body ">
+                                        @if (@ViewBag.ShippingError != null)
+                                        {
+                                            <h3 style="color: red;font-size: 15px;">@ViewBag.ShippingError</h3>
+                                        }
+                                        else
+                                        {
+                                            <p>Please select the preferred shipping method to use on this order.</p>
+                                        }
+
+
+                                        @if (ord.ShipperId == null)
+                                        {
+                                            @Html.DropDownList("Shipper", ViewBag.Shipper as SelectList, "Select Shippers", new { @onchange = "this.form.submit();", @class = "form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownList("Shipper", ViewBag.Shipper as SelectList, ord.Shipper.ShipperName, new { @onchange = "this.form.submit();", @class = "form-control" })
+                                        }
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <!--Email End-->
+                        <div class="col-sm-12">
+
+
+                            <form action="~/Payment/Pay" method="post">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+
+                                        <h4 class="panel-title"><i class="fa fa-credit-card"></i> Payment Method</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        @if (@ViewBag.PaymentError != null)
+                                        {
+                                            <h3 style="color: red;font-size: 15px;">@ViewBag.PaymentError</h3>
+                                        }
+                                        else
+                                        {
+                                            <p>Please select the preferred payment method to use on this order.</p>
+                                        }
+
+                                        @Html.DropDownList("PaymentTypes", ViewBag.PaymentTypes as SelectList, "Select Payment Type", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <input type="submit" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                                </div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--Middle Part End -->
+
+    </div>
+</div>
+

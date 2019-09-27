@@ -1,0 +1,84 @@
+﻿@model ECommerce.Entity.Member
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared1/_UserLayout.cshtml";
+}
+
+    <div class="main-container container">
+        <ul class="header-main "></ul>
+
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <h2 class="title">Register Account</h2>
+                <p>If you already have an account with us, please login at the <a href="#">login page</a>.</p>
+                <form action="~/Account/Register" method="post"  class="form-horizontal account-register clearfix">
+                    @Html.ValidationSummary(false)
+                    <fieldset id="account">
+                        <legend>Your Personal Details</legend>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="FirstName" value="" required="required" placeholder="First Name" id="FirstName" class="form-control">
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="LastName" value="" required="required" placeholder="Last Name" id="LastName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
+                            <div class="col-sm-10">
+                                <input type="email" name="Email" value="" required="required" placeholder="E-Mail" id="Email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-email">User Role</label>
+                            <div class="col-sm-5">
+                                @Html.DropDownList("UserRole", ViewBag.UserRole as SelectList,"Plase Enter User Role", new {@class="form-control" ,@required = "required"})
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <fieldset id="address">
+                        <legend>Your Address</legend>
+
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label"  for="input-address-1">Address</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Address" value="" required="required" placeholder="Address" id="Address" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                    <fieldset>
+                        <legend>Your Password</legend>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-password">Password</label>
+                            <div class="col-sm-10">
+                                <input type="Password" name="password" value="" required="required" placeholder="Password" id="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-confirm">Password Confirm</label>
+                            <div class="col-sm-10">
+                                <input type="password" name="confirm" value="" required="required" placeholder="Password Confirm" id="input-confirm" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="buttons">
+                        <div class="pull-right">
+
+                            <input type="submit" value="Continue" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+

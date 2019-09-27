@@ -1,0 +1,117 @@
+﻿@using ECommerce.Entity
+@using ECommerce.Repository
+@model IEnumerable<Product>
+
+<div class="main-container container">
+    <ul class="header-main">
+        @*<li class="home"><a href="index.html">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>*@
+    </ul>
+
+    <div class="row">
+        <!--Left Part Start -->
+        <aside class="col-sm-4 col-md-3 type-1" id="column-left">
+            <div class="module menu-category titleLine">
+                <h2 class="text-center">Categories</h2>
+                <div class="modcontent">
+                    <div class="box-category">
+                        <ul id="cat_accordion" class="list-group">
+                            @{
+
+                                CategoryRepository cr = new CategoryRepository();
+                                foreach (Category item in cr.List().ProcessResult)
+                                {
+
+                                    <li class=""><a href="~/Home/List/@item.CategoryId" class="cutom-parent">@item.CategoryName</a> </li>
+                                }
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="module menu-category titleLine">
+                <h3 class="modtitle text-center">Brand</h3>
+                <div class="modcontent">
+                    <div class="box-category">
+                        <ul id="cat_accordion" class="list-group">
+                            @{
+
+                                BrandRepository br = new BrandRepository();
+                                foreach (Brand item in br.List().ProcessResult)
+                                {
+
+                                    <li class=""><a href="~/Home/ListByBrand/@item.BrandId" class="cutom-parent">@item.BrandName</a> <span class="dcjq-icon"></span></li>
+                                }
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </aside>
+        <!--Left Part End -->
+        <!--Middle Part Start-->
+        <div id="content" class="col-md-9 col-sm-8 type-1">
+            <div class="products-category">
+                <!-- Filters -->
+                <h3 class="modtitle"></h3>
+                <div style="margin-top: 40px;" class="product-filter filters-panel">
+                    <div class="row">
+                        <div class="col-md-5 visible-lg">
+                            <div class="view-mode">
+                                <div class="list-view">
+                                    <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip" data-original-title="Grid"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                                    <button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- //end Filters -->
+                <!--changed listings-->
+                <div  class="products-list grid">
+
+                    @foreach (Product item in Model)
+                    {
+
+                        <div class="product-layout">
+                            <div class="product-item-container">
+                                <div class="left-block" style="min-width:260px">
+                                    <div class="product-image-container  second_img ">
+                                        <a class="product-img" href="~/Home/Detail/@item.ProductId">
+                                            <img style="min-height: 260px;" src="~/Upload/@item.Photo" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <div class="caption">
+                                        <h4><a href="~/Home/Detail/@item.ProductId">@item.ProductName</a></h4>
+                                        <div class="price">
+                                            <span class="price-new">@item.Price.Value.ToString("C0") </span>
+                                        </div>
+                                    </div>
+                                    <div class="button-group">
+                                        <a href="~/Order/Add/@item.ProductId" class="addToCart btn btn-default " data-toggle="tooltip" title="" onclick="cart.add('42', '1');" data-original-title="Add to Cart"> <span class="">Add to Cart</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--Middle Part End-->
+</div>
